@@ -882,7 +882,9 @@ int send_steering_msg(socket_info_type* socket_info,
 #ifdef REG_DEBUG
   fprintf(stderr, "send_steering_msg: sending header...\n");
 #endif
-  result = send_no_signal(connector, (void*)&num_bytes_to_send, sizeof(int), 0);
+  // Convert num_bytes_to_send to network order
+  size_t n_nbts = htonl(num_bytes_to_send);
+  result = send_no_signal(connector, (void*)&n_nbts, sizeof(int), 0);
   if(result != sizeof(int)) {
     perror("send");
     return REG_FAILURE;
@@ -930,6 +932,8 @@ int consume_steering_msg(socket_info_type* socket_info, char* data) {
 
   /* get header */
   nbytes = recv_wait_all(connector, (void*) &data_size, sizeof(int), 0);
+  // Convert from network endianness to host endianness
+  data_size = ntohl(data_size);
   if(nbytes != sizeof(int)) {
     fprintf(stderr, "consume_steering_msg: Could not get message header");
     return REG_FAILURE;
