@@ -48,12 +48,12 @@ set(install_dir include/RealityGrid)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
   DESTINATION ${install_dir}
-  FILES_MATCHING PATTERN "*.h"
+  PATTERN "*.h"
 )
 
 if(REG_BUILD_FORTRAN_WRAPPERS)
   install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
     DESTINATION ${install_dir}
-    FILES_MATCHING PATTERN "*.inc"
+    PATTERN "*.inc"
   )
 endif(REG_BUILD_FORTRAN_WRAPPERS)
