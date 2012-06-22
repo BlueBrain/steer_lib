@@ -1,4 +1,4 @@
 # ignore emacs generated ~
 *~
-CMakeLists.txt.user
+CMakeLists.txt.user*
 Makefile
