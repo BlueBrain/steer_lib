@@ -59,6 +59,12 @@
     @author Robert Haines
 */
 
+#ifdef _MSC_VER
+#  ifndef HAVE_SSIZE_T
+typedef SSIZE_T    ssize_t;
+#  endif
+#endif
+
 /** The namespace used for steering messages (which are in xml) */
 #define REG_STEER_NAMESPACE "http://www.realitygrid.org/xml/steering"
 

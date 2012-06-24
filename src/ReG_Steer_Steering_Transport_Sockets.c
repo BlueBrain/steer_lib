@@ -865,6 +865,7 @@ int send_steering_msg(socket_info_type* socket_info,
   int result;
   char* pchar;
   int connector = socket_info->connector_handle;
+  size_t n_nbts;
 
   if(num_bytes_to_send < 0) {
     fprintf(stderr, "send_steering_msg: requested to write < 0 bytes!\n");
@@ -883,7 +884,7 @@ int send_steering_msg(socket_info_type* socket_info,
   fprintf(stderr, "send_steering_msg: sending header...\n");
 #endif
   // Convert num_bytes_to_send to network order
-  size_t n_nbts = htonl(num_bytes_to_send);
+  n_nbts = htonl(num_bytes_to_send);
   result = send_no_signal(connector, (void*)&n_nbts, sizeof(int), 0);
   if(result != sizeof(int)) {
     perror("send");
