@@ -71,6 +71,16 @@ if(NOT EXECUTABLE_OUTPUT_PATH)
   set(EXECUTABLE_OUTPUT_PATH ${REG_BINARY_DIR}/bin CACHE INTERNAL "Single output directory for building all executables.")
 endif(NOT EXECUTABLE_OUTPUT_PATH)
 
+# OS X architecture
+if(APPLE)
+  if(_CMAKE_OSX_MACHINE MATCHES "ppc")
+    set(OSX_ARCHITECTURES "ppc;ppc64" CACHE STRING "Build architectures")
+  else()
+    set(OSX_ARCHITECTURES "i386;x86_64" CACHE STRING "Build architectures")
+  endif()
+  set(CMAKE_OSX_ARCHITECTURES ${OSX_ARCHITECTURES})
+endif()
+
 #
 # build shared or static libs
 #
