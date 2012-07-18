@@ -58,6 +58,12 @@
 
 #define REG_SOCKETS_ERROR -1
 
+#ifdef _MSC_VER
+#  ifndef HAVE_SSIZE_T
+typedef SSIZE_T    ssize_t;
+#  endif
+#endif
+
 /** @internal
     Structure to hold socket information */
 typedef struct {
